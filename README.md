@@ -1,5 +1,7 @@
 # Interface3-summer2018
 
+![Local boy becomes ‘Pilot for a Day’](banner.png) source:https://www.mcchord.af.mil/News/Article-Display/Article/247720/local-boy-becomes-pilot-for-a-day/
+
 ## resources
 
 ### unity addons
@@ -11,6 +13,11 @@
 
 ### pad
 + [framapad](https://bimestriel.framapad.org/p/interface3-summer2018) - warning: available until 19/10!!!
+
+### tools
+
++ [blender](https://www.blender.org/), open source 3d creation
++ [gimp](https://www.gimp.org/), the free & open source image editor
 
 ## about
 
