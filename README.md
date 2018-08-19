@@ -11,3 +11,8 @@
 
 ### pad
 + [framapad](https://bimestriel.framapad.org/p/interface3-summer2018) - warning: available until 19/10!!!
+
+## about
+
++ school: [Interface3](http://www.interface3.be/en/interface3)
++ trainer: [François Z.](http://frankiezafe.org) artist/developer - [polymorph.cool, video game bazaar](http://polymorph.cool)
