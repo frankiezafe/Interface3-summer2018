@@ -2,6 +2,12 @@
 
 ![Local boy becomes ‘Pilot for a Day’](banner.png) source:https://www.mcchord.af.mil/News/Article-Display/Article/247720/local-boy-becomes-pilot-for-a-day/
 
+## scenes
+
++ **Scenes/RayBasics**: quaternion rotations and custom raycasting
++ **Scenes/LazerBeams**: attaching an object to the HTC Vive controller and overriding events
++ **Assets/SteamVR/Samples/Scenes/Interactions_Example**, full functionality demo of the HTC Vive functionalities
+
 ## resources
 
 ### unity addons
