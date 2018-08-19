@@ -8,3 +8,6 @@
 
 ### online resources
 + [HTC Vive Unity Tutorial](http://academyofvr.com/intro-vr-development-unity-htc-vive/) by [Academy of VR](http://academyofvr.com)
+
+### pad
++ [framapad](https://bimestriel.framapad.org/p/interface3-summer2018) - warning: available until 19/10!!!
