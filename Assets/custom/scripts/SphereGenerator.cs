@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SphereGenerator : MonoBehaviour {
 
-    [Range(1,20)]
+    [Range(0,20)]
     public int y_steps = 5;
 
     [Range(1, 20)]
@@ -31,13 +31,18 @@ public class SphereGenerator : MonoBehaviour {
         for (int y = -y_steps; y <= y_steps; ++y)
         {
 
+            float py = 0;
+            if (y_steps != 0) {
+                py = (y * 1f / y_steps) * inner_radius;
+            }
+
             for (float a = 0; a < Mathf.PI * 2; a += asteps) {
 
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.transform.parent = this.transform;
                 sphere.transform.position = new Vector3(
                     Mathf.Cos(a) * inner_radius ,
-                    (y *1f / y_steps) * inner_radius,
+                    py,
                     Mathf.Sin(a) * inner_radius
                     );
                 sphere.transform.localScale = new Vector3(sphere_radius, sphere_radius, sphere_radius);
