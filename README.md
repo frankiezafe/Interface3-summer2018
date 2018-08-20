@@ -5,8 +5,8 @@
 ## scenes
 
 + **Scenes/RayBasics**: quaternion rotations and custom raycasting
-+ **Scenes/LazerBeams**: attaching an object to the HTC Vive controller and overriding events
 + **Assets/SteamVR/Samples/Scenes/Interactions_Example**, full functionality demo of the HTC Vive functionalities
++ **Scenes/LazerBeams**: attaching an object to the HTC Vive controller and overriding events
 
 ## resources
 
@@ -18,6 +18,7 @@
 + [HTC Vive Unity Tutorial](http://academyofvr.com/intro-vr-development-unity-htc-vive/) by [Academy of VR](http://academyofvr.com)
 
 ### pad
+
 + [framapad](https://bimestriel.framapad.org/p/interface3-summer2018) - warning: available until 19/10!!!
 
 ### tools

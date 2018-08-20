@@ -932,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc0890dcff7a65418a332ce8a1765ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rot_speed: 61
+  rot_speed: 43
   rot_axis: {x: 0, y: 1, z: 1}
   axis: {fileID: 1815517823}
   hit_sphere: {fileID: 903427378}
