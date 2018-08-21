@@ -16,6 +16,9 @@ public class CamMouse: MonoBehaviour {
     public LineRenderer msg_line = null;
     public Vector3 msg_offset = new Vector3(0.25f, 0.25f, -0.5f);
 
+    public AudioClip soundclip = null;
+    public AudioSource soundplayer = null;
+
     private Material previous_mat = null;
     private GameObject previous_obj = null;
     private GameObject current_obj = null;
@@ -129,6 +132,10 @@ public class CamMouse: MonoBehaviour {
                 }
             }
 
+            if (soundplayer != null && soundclip != null) {
+                soundplayer.PlayOneShot(soundclip, 0.8f);
+            }
+
         }
 
     }
@@ -194,7 +201,7 @@ public class CamMouse: MonoBehaviour {
         {
             msg_board.SetActive(false);
         }
-
+            
     }
 
     void Update()
