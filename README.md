@@ -2,6 +2,8 @@
 
 ![Local boy becomes ‘Pilot for a Day’](banner.png) source:https://www.mcchord.af.mil/News/Article-Display/Article/247720/local-boy-becomes-pilot-for-a-day/
 
+Cours de VR dans Unity du 20 au 24 août 2018.
+
 ## scenes
 
 + **Assets/Interface3/scenes/RayBasics**: quaternion rotations and custom raycasting
@@ -30,6 +32,4 @@
 
 + school: [Interface3](http://www.interface3.be/en/interface3)
 + trainer: [François Z.](http://frankiezafe.org) artist/developer - [polymorph.cool, video game bazaar](http://polymorph.cool)
-
-
 
