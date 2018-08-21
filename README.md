@@ -30,3 +30,6 @@
 
 + school: [Interface3](http://www.interface3.be/en/interface3)
 + trainer: [François Z.](http://frankiezafe.org) artist/developer - [polymorph.cool, video game bazaar](http://polymorph.cool)
+
+
+
