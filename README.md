@@ -31,5 +31,9 @@ Cours de VR dans Unity du 20 au 24 août 2018.
 ## about
 
 + school: [Interface3](http://www.interface3.be/en/interface3)
+<<<<<<< HEAD
++ trainer: [François Z.](http://frankiezafe.org) artist/developer - [polymorph.cool, video game bazaar](http://polymorph.cool)
+=======
 + trainer: [François Z.](http://frankiezafe.org) artist/developer - [polymorph.cool, video game bazaar](http://polymorph.cool)
 
+>>>>>>> origin/master
