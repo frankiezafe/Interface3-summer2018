@@ -4,9 +4,9 @@
 
 ## scenes
 
-+ **Scenes/RayBasics**: quaternion rotations and custom raycasting
++ **Assets/Interface3/scenes/RayBasics**: quaternion rotations and custom raycasting
 + **Assets/SteamVR/Samples/Scenes/Interactions_Example**, full functionality demo of the HTC Vive functionalities
-+ **Scenes/LazerBeams**: attaching an object to the HTC Vive controller and overriding events
++ **Assets/Interface3/scenes/LazerBeams**: attaching an object to the HTC Vive controller and overriding events
 
 ## resources
 
