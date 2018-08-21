@@ -11,16 +11,36 @@ public class CamMouse: MonoBehaviour {
     [Range(-10,10)]
     public float scroll_speed = 0.3f;
 
+    public string grabbable_tag = "";
+
+    public bool debug = false;
+
     private Material previous_mat = null;
     private GameObject previous_obj = null;
     private GameObject current_obj = null;
 
     private float ray_distance = 0;
     private Vector3 ray_hit_point;
+    private Vector3 ray_offset;
 
     private bool grab_active = false;
     private Vector3 mouse_grab_init;
-    private Vector3 grab_offset;
+
+    private GameObject hit_debug;
+
+    private GameObject generate_sphere() {
+
+        GameObject sph = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sph.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+
+        SphereCollider bc = sph.GetComponent<SphereCollider>();
+        if ( bc != null ) {
+            Destroy(bc);
+        }
+
+        return sph;
+
+    }
 
     private void release_previous() {
 
@@ -50,22 +70,33 @@ public class CamMouse: MonoBehaviour {
             {
 
                 ray_hit_point = hit.point;
-
+                if ( debug )
+                {
+                    hit_debug.transform.position = ray_hit_point;
+                }
                 current_obj = hit.transform.gameObject;
+                ray_offset = current_obj.transform.position - ray_hit_point;
+                ray_distance = Vector3.Distance(current_obj.transform.position, cam.transform.position);
+
                 Renderer obj_renderer = current_obj.GetComponent<Renderer>();
 
-                ray_distance = Vector3.Distance(current_obj.transform.position, cam.transform.position);
+                if (current_obj.tag != grabbable_tag)
+                {
+                    current_obj = null;
+                }
 
                 if (previous_obj != null && previous_obj != current_obj)
                 {
-                    previous_obj.GetComponent<Renderer>().material = previous_mat;
+                    release_previous();
                 }
-                if (previous_obj != current_obj)
+
+                if (current_obj != null && previous_obj != current_obj)
                 {
                     previous_mat = obj_renderer.material;
                     obj_renderer.material = hover_mat;
                     previous_obj = current_obj;
                 }
+
             }
             else
             {
@@ -83,8 +114,8 @@ public class CamMouse: MonoBehaviour {
         if (current_obj != null)
         {
             mouse_grab_init = Input.mousePosition;
-            grab_offset = current_obj.transform.position - ray_hit_point;
             grab_active = true;
+
         }
 
     }
@@ -117,7 +148,7 @@ public class CamMouse: MonoBehaviour {
         }
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        Vector3 new_pos = cam.transform.position + ( ray.direction * ray_distance ) + grab_offset;
+        Vector3 new_pos = cam.transform.position + ( ray.direction * ray_distance ) + ray_offset;
         current_obj.transform.position = new_pos;
 
         //Debug.Log("grab_update");
@@ -126,6 +157,10 @@ public class CamMouse: MonoBehaviour {
 
     void Start()
     {
+        if (debug)
+        {
+            hit_debug = generate_sphere();
+        }
     }
 
     void Update()

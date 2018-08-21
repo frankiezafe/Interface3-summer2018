@@ -140,9 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a49bf31d0aa79348bf80b11bc27d715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1638810520}
-  normal: {fileID: 2100000, guid: 826c4b9c9edcb3646a0250cedf0a1f43, type: 2}
-  touched: {fileID: 2100000, guid: 5bf872efd4c8ead4c840da622629c77d, type: 2}
+  cam: {fileID: 1638810520}
+  hover_mat: {fileID: 2100000, guid: 5bf872efd4c8ead4c840da622629c77d, type: 2}
+  scroll_speed: 0.3
+  grabable_tag: grabbable
 --- !u!4 &118538691
 Transform:
   m_ObjectHideFlags: 0
@@ -169,7 +170,7 @@ GameObject:
   - component: {fileID: 263800869}
   m_Layer: 0
   m_Name: cube3
-  m_TagString: Untagged
+  m_TagString: grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -405,7 +406,7 @@ GameObject:
   - component: {fileID: 951392354}
   m_Layer: 0
   m_Name: cube2
-  m_TagString: Untagged
+  m_TagString: grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
