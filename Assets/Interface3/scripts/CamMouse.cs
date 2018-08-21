@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CamMouse: MonoBehaviour {
 
     public Camera cam;
-
     public Material hover_mat;
-
     [Range(-10,10)]
     public float scroll_speed = 0.3f;
-
     public string grabbable_tag = "";
-
     public bool debug = false;
+    public GameObject msg_board = null;
+    public Text msg_txt = null;
+    public LineRenderer msg_line = null;
+    public Vector3 msg_offset = new Vector3(0.25f, 0.25f, -0.5f);
 
     private Material previous_mat = null;
     private GameObject previous_obj = null;
@@ -27,6 +28,9 @@ public class CamMouse: MonoBehaviour {
     private Vector3 mouse_grab_init;
 
     private GameObject hit_debug;
+
+    private List<string> msgs = new List<string> {"joli!", "bien joué!", "houuuuu!", "splendide!"};
+    private int msg_index = 0;
 
     private GameObject generate_sphere() {
 
@@ -117,6 +121,14 @@ public class CamMouse: MonoBehaviour {
             mouse_grab_init = Input.mousePosition;
             grab_active = true;
 
+            if (msg_board != null) {
+                msg_board.SetActive(true);
+                if (msg_txt != null) {
+                    msg_txt.text = msgs[msg_index];
+                    msg_index = (++msg_index) % msgs.Count;
+                }
+            }
+
         }
 
     }
@@ -128,6 +140,11 @@ public class CamMouse: MonoBehaviour {
 
         grab_active = false;
         release_previous();
+
+        if (msg_board != null)
+        {
+            msg_board.SetActive(false);
+        }
 
     }
 
@@ -152,6 +169,16 @@ public class CamMouse: MonoBehaviour {
         Vector3 new_pos = cam.transform.position + ( ray.direction * ray_distance ) + ray_offset;
         current_obj.transform.position = new_pos;
 
+        if (msg_board != null) {
+            msg_board.transform.position = cam.transform.position + (ray.direction * ray_distance) + ( cam.transform.rotation * msg_offset );
+            if (msg_line != null)
+            {
+                Vector3 mlp = msg_line.transform.position;
+                msg_line.SetPosition(0, cam.transform.position + (ray.direction * ray_distance) - mlp);
+                msg_line.SetPosition(1, msg_board.transform.position - mlp);
+            }
+        }
+
         //Debug.Log("grab_update");
 
     }
@@ -162,6 +189,12 @@ public class CamMouse: MonoBehaviour {
         {
             hit_debug = generate_sphere();
         }
+
+        if (msg_board != null)
+        {
+            msg_board.SetActive(false);
+        }
+
     }
 
     void Update()
