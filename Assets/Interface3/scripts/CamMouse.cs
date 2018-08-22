@@ -26,7 +26,10 @@ public class CamMouse: MonoBehaviour {
     private float ray_distance = 0;
     private Vector3 ray_hit_point;
     private Vector3 ray_offset;
+    private Vector3 ray_space;
+    private Vector3 ray_rel_hit;
 
+    private bool grab_test = false;
     private bool grab_active = false;
     private Vector3 mouse_grab_init;
 
@@ -53,7 +56,16 @@ public class CamMouse: MonoBehaviour {
 
         if (previous_obj != null)
         {
-            previous_obj.GetComponent<Renderer>().material = previous_mat;
+            if (hover_mat != null)
+            {
+                previous_obj.GetComponent<Renderer>().material = previous_mat;
+            }
+            if (grab_test) { 
+                Rigidbody rb = previous_obj.GetComponent<Rigidbody>();
+                if (rb != null) {
+                    rb.velocity = new Vector3(0, 0, 0);
+                }
+            }
             previous_obj = null;
         }
 
@@ -81,9 +93,13 @@ public class CamMouse: MonoBehaviour {
                 {
                     hit_debug.transform.position = ray_hit_point;
                 }
+
                 current_obj = hit.transform.gameObject;
-                ray_offset = current_obj.transform.position - ray_hit_point;
                 ray_distance = Vector3.Distance(current_obj.transform.position, cam.transform.position);
+
+                ray_space = cam.WorldToScreenPoint(current_obj.transform.position);
+                ray_offset = current_obj.transform.position - cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, ray_space.z));
+                ray_rel_hit = hit.point - current_obj.transform.position;
 
                 Renderer obj_renderer = current_obj.GetComponent<Renderer>();
 
@@ -99,8 +115,10 @@ public class CamMouse: MonoBehaviour {
 
                 if (current_obj != null && previous_obj != current_obj)
                 {
-                    previous_mat = obj_renderer.material;
-                    obj_renderer.material = hover_mat;
+                    if (hover_mat != null) { 
+                        previous_mat = obj_renderer.material;
+                        obj_renderer.material = hover_mat;
+                    }
                     previous_obj = current_obj;
                 }
 
@@ -166,24 +184,37 @@ public class CamMouse: MonoBehaviour {
         if (d > 0f)
         {
             ray_distance += scroll_speed;
+            ray_space.z += scroll_speed;
         }
         else if (d < 0f)
         {
             ray_distance -= scroll_speed;
+            ray_space.z -= scroll_speed;
         }
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        Vector3 new_pos = cam.transform.position + ( ray.direction * ray_distance ) + ray_offset;
+        Vector3 relp = new Vector3(Input.mousePosition.x, Input.mousePosition.y, ray_space.z);
+        Vector3 new_pos = cam.ScreenToWorldPoint(relp) + ray_offset;
+
         current_obj.transform.position = new_pos;
 
+        new_pos += ray_rel_hit;
+
+        if (debug)
+        {
+            hit_debug.transform.position = new_pos;
+        }
+
         if (msg_board != null) {
-            msg_board.transform.position = cam.transform.position + (ray.direction * ray_distance) + ( cam.transform.rotation * msg_offset );
+
+            msg_board.transform.position = new_pos + ( cam.transform.rotation * msg_offset );
+
             if (msg_line != null)
             {
                 Vector3 mlp = msg_line.transform.position;
-                msg_line.SetPosition(0, cam.transform.position + (ray.direction * ray_distance) - mlp);
-                msg_line.SetPosition(1, msg_board.transform.position - mlp);
+                msg_line.SetPosition(0, new_pos - mlp);
+                msg_line.SetPosition(1, new Vector3(0,0,0));
             }
+
         }
 
         //Debug.Log("grab_update");
@@ -209,12 +240,15 @@ public class CamMouse: MonoBehaviour {
 
         compute_hover();
 
-        if (Input.GetMouseButton(0) && !grab_active)
+        if (Input.GetMouseButton(0) && !grab_active && !grab_test)
         {
+            grab_test = true;
             grab_start();
         }
-        else if (!Input.GetMouseButton(0) && grab_active) {
+        else if (!Input.GetMouseButton(0) && grab_test)
+        {
             grab_stop();
+            grab_test = false;
         }
 
         if (grab_active) {
