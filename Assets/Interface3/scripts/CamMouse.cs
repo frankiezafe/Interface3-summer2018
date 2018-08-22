@@ -9,7 +9,10 @@ public class CamMouse: MonoBehaviour {
     public Material hover_mat;
     [Range(-10,10)]
     public float scroll_speed = 0.3f;
+
     public string grabbable_tag = "";
+    public string jump_tag = "";
+
     public bool debug = false;
     public GameObject msg_board = null;
     public Text msg_txt = null;
@@ -104,6 +107,11 @@ public class CamMouse: MonoBehaviour {
                 ray_rel_hit = hit.point - current_obj.transform.position;
 
                 Renderer obj_renderer = current_obj.GetComponent<Renderer>();
+
+                if (current_obj.tag != jump_tag)
+                {
+                    cam.transform.position = current_obj.transform.position;
+                }
 
                 if (current_obj.tag != grabbable_tag)
                 {
