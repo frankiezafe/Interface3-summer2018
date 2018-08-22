@@ -108,7 +108,7 @@ public class CamMouse: MonoBehaviour {
 
                 Renderer obj_renderer = current_obj.GetComponent<Renderer>();
 
-                if (current_obj.tag != jump_tag)
+                if (current_obj.tag == jump_tag)
                 {
                     cam.transform.position = current_obj.transform.position;
                 }
