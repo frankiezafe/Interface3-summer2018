@@ -56,7 +56,7 @@ public class CamMouse: MonoBehaviour {
 
         if (previous_obj != null)
         {
-            if (hover_mat != null)
+            if (obj_renderer != null && hover_mat != null)
             {
                 previous_obj.GetComponent<Renderer>().material = previous_mat;
             }
@@ -115,7 +115,7 @@ public class CamMouse: MonoBehaviour {
 
                 if (current_obj != null && previous_obj != current_obj)
                 {
-                    if (hover_mat != null) { 
+                    if (obj_renderer != null && hover_mat != null) { 
                         previous_mat = obj_renderer.material;
                         obj_renderer.material = hover_mat;
                     }
