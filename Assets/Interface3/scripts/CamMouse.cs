@@ -56,6 +56,8 @@ public class CamMouse: MonoBehaviour {
 
         if (previous_obj != null)
         {
+            Renderer obj_renderer = previous_obj.GetComponent<Renderer>();
+
             if (obj_renderer != null && hover_mat != null)
             {
                 previous_obj.GetComponent<Renderer>().material = previous_mat;
