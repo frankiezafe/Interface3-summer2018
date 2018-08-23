@@ -22,6 +22,8 @@ public class CamMouse: MonoBehaviour {
     public AudioClip soundclip = null;
     public AudioSource soundplayer = null;
 
+    public Memory memory = null;
+
     private Material previous_mat = null;
     private GameObject previous_obj = null;
     private GameObject current_obj = null;
@@ -149,8 +151,13 @@ public class CamMouse: MonoBehaviour {
 
         if (current_obj != null)
         {
+
             mouse_grab_init = Input.mousePosition;
             grab_active = true;
+
+            if (memory != null) {
+                memory.object_grabbed(current_obj);
+            }
 
             if (msg_board != null) {
                 msg_board.SetActive(true);
